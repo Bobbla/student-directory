@@ -2,13 +2,13 @@ student_count = 6
 
 #let's put all students into an array
 students = [
-"Javier Silverio",
-"Elliot Lewis",
-"Ben Tillett",
-"Vincent Koch",
-"Michelle Ballard",
-"Nick Roberts",
-"Emma Feeney"
+	{:name=> "Javier Silverio", :cohort => :august},
+	{:name=> "Elliot Lewis", :cohort=> :august},
+	{:name=> "Ben Tillett", :cohort=> :august},
+	{:name=> "Vincent Koch", :cohort=> :august},
+	{:name=> "Michelle Ballard", :cohort=> :august},
+	{:name=> "Nick Roberts", :cohort=> :august},
+	{:name=> "Emma Feeney", :cohort => :august}
 ]
 
 def print_header
@@ -18,7 +18,7 @@ end
 
 def print(students)
 	students.each do |student|
-		puts student
+		puts "#{student[:name]} (#{student[:cohort]} cohort)"
 	end
 end
 
