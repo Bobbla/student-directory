@@ -47,3 +47,12 @@ def student_select(studentlist)
 end
 
 student_select(students)
+#calling names with less than 12 characters
+def name_length(studentlist)
+	puts "These names have less and 12 characters"
+	studentlist.select  do |student|
+		puts "#{student[:name]}" if student[:name].length < 12
+	end
+end		
+
+name_length(students) 
