@@ -9,10 +9,16 @@ def input_students
 	#Which cohort
 	print "What cohort are you on?\n"
 	cohort = gets.chomp 
-	#provided default
-				if cohort.empty?
-				cohort = "xxx"
-				puts "cohort not provided"
+	#provided default & corrected spelling
+	cohort_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+				if cohort_months.include?(cohort)
+					puts "Cohort verified"
+				elsif cohort.empty?
+					cohort = "xxx"
+					puts "cohort not provided"
+				else
+				puts "Please re-enter cohort"
+				cohort = gets.chomp
 			end
 	#ask about hobbies
 	print "What are your hobbies?\n"
