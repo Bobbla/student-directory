@@ -4,21 +4,43 @@ def input_students
 	#create an empty array
 	students = []
 	#get the first name
+	print "What is your name?\n"
 	name = gets.chomp
+	#ask about hobbies
+	print "What are your hobbies?\n"
+	hobbies = gets.chomp
+	#country of birth
+	print "What what country where you born in?\n"
+	country = gets.chomp
+	#height
+	print "how tall are you?\n"
+	height = gets.chomp 
 	#while the name is not empty, repeat this code
 	while !name.empty? do
 		# add the student hash to the array
-		students << {:name => name, :cohort => :august}
+		students << {:name => name, :cohort => :august, :hobbies => hobbies, :country => country, :height => height}
 		print "Now we have #{students.length} students\n"
 		# get another name from user
+		print "What is the next name?\n"
 		name = gets.chomp
+		if name != ""
+			print "What are your hobbies?\n"
+			hobbies = gets.chomp
+			#country of birth
+			print "What what country where you born in?\n"
+			country = gets.chomp
+			#height
+			print "how tall are you?\n"
+			height = gets.chomp 
+		end
 	end
 	#return array of students
 	students
 end
-
+#used method center to make output pretty
 def print_header
-	print "The Students of my cohort at Makers Academy\n--------------\n"
+	header = "The Students of my cohort at Makers Academy\n--------------\n"
+	puts header.center(100)
 end
 #rewrite method to print all students using "while" or "until"
 
@@ -33,14 +55,17 @@ end
 # end
 
 def print_student(studentlist)
-	count = 1
-		until count >=studentlist.length
-			studentlist.select  do |student|
-			puts "#{count}. #{student[:name]} (#{student[:cohort]} cohort)\n"
+	count = 0
+	until count >=studentlist.length
+		studentlist.select  do |student|
 			count = count +1	
+			puts "#{count}. #{student[:name]} (#{student[:cohort]} cohort)"
+			line2 = "Hobbies: #{student[:hobbies]}, place of Birth: #{student[:country]}, Height: #{student[:height]}\n" 
+			puts line2.center(53)		
 		end		
 	end
 end
+
 
 # def print_student(students)
 # 	students.each.with_index(1) do |student, index|
@@ -49,7 +74,8 @@ end
 # end
 
 def print_footer(students)
-	print "Overall, we have #{students.length} great students\n"
+	footer = "Overall, we have #{students.length} great students\n"
+	puts footer.center(100)
 end
 #nothing happens until we call the methods
 students = input_students
@@ -77,3 +103,4 @@ def name_length(studentlist)
 end		
 
 name_length(students) 
+
