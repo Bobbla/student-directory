@@ -6,6 +6,14 @@ def input_students
 	#get the first name
 	print "What is your name?\n"
 	name = gets.chomp
+	#Which cohort
+	print "What cohort are you on?\n"
+	cohort = gets.chomp 
+	#provided default
+				if cohort.empty?
+				cohort = "xxx"
+				puts "cohort not provided"
+			end
 	#ask about hobbies
 	print "What are your hobbies?\n"
 	hobbies = gets.chomp
@@ -18,12 +26,15 @@ def input_students
 	#while the name is not empty, repeat this code
 	while !name.empty? do
 		# add the student hash to the array
-		students << {:name => name, :cohort => :august, :hobbies => hobbies, :country => country, :height => height}
+		students << {:name => name, :cohort => cohort, :hobbies => hobbies, :country => country, :height => height}
 		print "Now we have #{students.length} students\n"
 		# get another name from user
 		print "What is the next name?\n"
 		name = gets.chomp
 		if name != ""
+			print "What cohort are you on?\n"
+			cohort = gets.chomp 
+				#ask about hobbies
 			print "What are your hobbies?\n"
 			hobbies = gets.chomp
 			#country of birth
