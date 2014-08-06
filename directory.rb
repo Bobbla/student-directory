@@ -36,7 +36,7 @@ print_header
 print_student(students)
 print_footer(students)
 
-#modify program to only search for characters beginning with "A"
+#modify program to only search for names beginning with "A"
 
 def student_select(studentlist)
 	studentlist.select do |student|
