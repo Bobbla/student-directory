@@ -23,7 +23,7 @@ end
 #rewrite method to print all students using "while" or "until"
 def print_student(studentlist)
 	count = 1
-		while count <=studentlist.length
+		until count >=studentlist.length
 			studentlist.select  do |student|
 			puts "#{count}. #{student[:name]} (#{student[:cohort]} cohort)\n"
 			count = count +1	
