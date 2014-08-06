@@ -20,10 +20,10 @@ end
 def print_header
 	print "The Students of my cohort at Makers Academy\n--------------\n"
 end
-
+#added index to printed students list at the end
 def print_student(students)
-	students.each do |student|
-		print "#{student[:name]} (#{student[:cohort]} cohort)\n"
+	students.each.with_index(1) do |student, index|
+		print "#{index} #{student[:name]} (#{student[:cohort]} cohort)\n"
 	end
 end
 
