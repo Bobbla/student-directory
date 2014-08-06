@@ -39,8 +39,10 @@ print_footer(students)
 #modify program to only search for names beginning with "A"
 
 def student_select(studentlist)
+	puts "What starting letter would you like to search for?"
+	character = gets.chomp.capitalize
 	studentlist.select do |student|
-		puts "#{student[:name]}" if student[:name].start_with?("A")
+		puts "#{student[:name]}" if student[:name].start_with?(character)
 	end
 end
 
