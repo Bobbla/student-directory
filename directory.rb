@@ -1,15 +1,21 @@
-student_count = 6
-
-#let's put all students into an array
-students = [
-	{:name=> "Javier Silverio", :cohort => :august},
-	{:name=> "Elliot Lewis", :cohort=> :august},
-	{:name=> "Ben Tillett", :cohort=> :august},
-	{:name=> "Vincent Koch", :cohort=> :august},
-	{:name=> "Michelle Ballard", :cohort=> :august},
-	{:name=> "Nick Roberts", :cohort=> :august},
-	{:name=> "Emma Feeney", :cohort => :august}
-]
+def input_students
+	puts "Please enter the names of the students"
+	puts "To finish, just hit return twice"
+	#create an empty array
+	students = []
+	#get the first name
+	name = gets.chomp
+	#while the name is not empty, repeat this code
+	while !name.empty? do
+		# add the student hash to the array
+		students << {:name => name, :cohort => :august}
+		puts "Now we have #{students.length} students"
+		# get another name from user
+		name = gets.chomp
+	end
+	#return array of students
+	students
+end
 
 def print_header
 	puts "The Students of my cohort at Makers Academy"
@@ -26,6 +32,7 @@ def print_footer(students)
 	puts "Overall, we have #{students.length} great students"
 end
 #nothing happens until we call the methods
+students = input_students
 print_header
 print(students)
 print_footer(students)
