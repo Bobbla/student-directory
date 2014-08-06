@@ -36,7 +36,7 @@ print_header
 print_student(students)
 print_footer(students)
 
-#modify program to only search for names beginning with "A"
+#modify program to only search for a character called by the user 
 
 def student_select(studentlist)
 	puts "What starting letter would you like to search for?"
