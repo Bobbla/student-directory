@@ -55,10 +55,12 @@ def input_students
 	students
 end
 #used method center to make output pretty
+
 def print_header
 	header = "The Students of my cohort at Makers Academy\n--------------\n"
 	puts header.center(100)
 end
+
 #rewrite method to print all students using "while" or "until"
 
 # def print_student(studentlist)
@@ -83,22 +85,18 @@ def print_student(studentlist)
 	end
 end
 
-
 # def print_student(students)
 # 	students.each.with_index(1) do |student, index|
 # 		print "#{index} #{student[:name]} (#{student[:cohort]} cohort)\n"
 # 	end
 # end
 
-def print_footer(students)
-	footer = "Overall, we have #{students.length} great students\n"
-	puts footer.center(100)
-end
+	def print_footer(students)
+		footer = "Overall, we have #{students.length} great students\n"
+		puts footer.center(100)
+	end
+
 #nothing happens until we call the methods
-students = input_students
-print_header
-print_student(students)
-print_footer(students)
 
 #modify program to only search for a character called by the user 
 
@@ -110,7 +108,6 @@ def student_select(studentlist)
 	end
 end
 
-student_select(students)
 #calling names with less than 12 characters
 def name_length(studentlist)
 	puts "These names have less and 12 characters"
@@ -118,6 +115,16 @@ def name_length(studentlist)
 		puts "#{student[:name]}" if student[:name].length < 12
 	end
 end		
+#question 9 on excercises incomplete
+def student_cohorts(studentcohorts)
+	student_cohorts = (studentcohorts.map {|student| student[:cohort]}).uniq
+	puts student_cohorts
+end
 
+students = input_students
+print_header
+print_student(students)
+print_footer(students)
+student_select(students)
 name_length(students) 
-
+student_cohorts(students) 
