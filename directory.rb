@@ -33,7 +33,12 @@ def input_students
 	while !name.empty? do
 		# add the student hash to the array
 		students << {:name => name, :cohort => cohort, :hobbies => hobbies, :country => country, :height => height}
-		print "Now we have #{students.length} students\n"
+		#changed the pluralisation
+		print "Now we have #{students.length} great student"
+		if students.length != 1
+			print "s"
+		end
+		print "\n"
 		# get another name from user
 		print "What is the next name?\n"
 		name = gets.chomp
