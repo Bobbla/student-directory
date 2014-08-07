@@ -40,6 +40,16 @@ def input_students
 		if name != ""
 			print "What cohort are you on?\n"
 			cohort = gets.chomp 
+			#provided default & corrected spelling
+			if cohort_months.include?(cohort)
+					puts "Cohort verified"
+				elsif cohort.empty?
+					cohort = "xxx"
+					puts "cohort not provided"
+				else
+				puts "Please re-enter cohort"
+				cohort = gets.chomp
+			end
 				#ask about hobbies
 			print "What are your hobbies?\n"
 			hobbies = gets.chomp
@@ -94,9 +104,7 @@ end
 	def print_footer(students)
 		footer = "Overall, we have #{students.length} great students\n"
 		puts footer.center(100)
-	end
-
-#nothing happens until we call the methods
+	end 
 
 #modify program to only search for a character called by the user 
 
@@ -115,12 +123,19 @@ def name_length(studentlist)
 		puts "#{student[:name]}" if student[:name].length < 12
 	end
 end		
-#question 9 on excercises incomplete
+#print students by cohort
 def student_cohorts(studentcohorts)
 	student_cohorts = (studentcohorts.map {|student| student[:cohort]}).uniq
-	puts student_cohorts
+	# puts student_cohorts
+	student_cohorts.each do |cohort|
+		puts "#{cohort} cohort:"
+		studentcohorts.select do |student|
+			puts "#{student[:name]}" if student[:cohort] == cohort
+		end
+	end	
 end
 
+#nothing happens until we call the methods
 students = input_students
 print_header
 print_student(students)
