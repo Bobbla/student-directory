@@ -1,8 +1,9 @@
+	students = []
+
 def input_students
 	print "Please enter the names of the students\n"
 	print "To finish, just hit return twice\n"
 	#create an empty array
-	students = []
 	#get the first name
 	print "What is your name?\n"
 	name = gets.strip
@@ -32,10 +33,10 @@ def input_students
 	#while the name is not empty, repeat this code
 	while !name.empty? do
 		# add the student hash to the array
-		students << {:name => name, :cohort => cohort, :hobbies => hobbies, :country => country, :height => height}
+		@students << {:name => name, :cohort => cohort, :hobbies => hobbies, :country => country, :height => height}
 		#changed the pluralisation
-		print "Now we have #{students.length} great student"
-		if students.length != 1
+		print "Now we have #{@students.length} great student"
+		if @students.length != 1
 			print "s"
 		end
 		print "\n"
@@ -67,7 +68,7 @@ def input_students
 		end
 	end
 	#return array of students
-	students
+	@students
 end
 #used method center to make output pretty
 
@@ -88,10 +89,10 @@ end
 # 	end
 # end
 
-def print_student(studentlist)
+def print_students_list
 	count = 0
-	until count >=studentlist.length
-		studentlist.select  do |student|
+	until count >=@students.length
+		@students.select  do |student|
 			count = count +1	
 			puts "#{count}. #{student[:name]} (#{student[:cohort]} cohort)"
 			line2 = "Hobbies: #{student[:hobbies]}, place of Birth: #{student[:country]}, Height: #{student[:height]}\n" 
@@ -106,81 +107,118 @@ end
 # 	end
 # end
 
-	def print_footer(students)
-		footer = "Overall, we have #{students.length} great students\n"
+	def print_footer
+		footer = "Overall, we have #{@students.length} great students\n"
 		puts footer.center(100)
 	end 
 
 #modify program to only search for a character called by the user 
 
-def student_select(studentlist)
-	puts "What starting letter would you like to search for?"
-	character = gets.strip.capitalize
-	studentlist.select do |student|
-		puts "#{student[:name]}" if student[:name].start_with?(character)
-	end
-end
+# def student_select(studentlist)
+# 	puts "What starting letter would you like to search for?"
+# 	character = gets.strip.capitalize
+# 	studentlist.select do |student|
+# 		puts "#{student[:name]}" if student[:name].start_with?(character)
+# 	end
+# end
 
-#calling names with less than 12 characters
-def name_length(studentlist)
-	puts "These names have less and 12 characters"
-	studentlist.select  do |student|
-		puts "#{student[:name]}" if student[:name].length < 12
-	end
-end		
-#print students by cohort
-def student_cohorts(studentcohorts)
-	student_cohorts = (studentcohorts.map {|student| student[:cohort]}).uniq
-	# puts student_cohorts
-	student_cohorts.each do |cohort|
-		puts "#{cohort} cohort:"
-		studentcohorts.select do |student|
-			puts "#{student[:name]}" if student[:cohort] == cohort
-		end
-	end	
-end
-#created 'no students in list' output
-def show_students(students)
-	if students.length <= 0
-		puts "no students in list"
-	else
-		print_header
-		print_student(students)
-		print_footer(students)
-		student_select(students)
-		name_length(students) 
-		student_cohorts(students) 
-	end	
-end
+# #calling names with less than 12 characters
+# def name_length(studentlist)
+# 	puts "These names have less and 12 characters"
+# 	studentlist.select  do |student|
+# 		puts "#{student[:name]}" if student[:name].length < 12
+# 	end
+# end		
+# #print students by cohort
+# def student_cohorts(studentcohorts)
+# 	student_cohorts = (studentcohorts.map {|student| student[:cohort]}).uniq
+# 	# puts student_cohorts
+# 	student_cohorts.each do |cohort|
+# 		puts "#{cohort} cohort:"
+# 		studentcohorts.select do |student|
+# 			puts "#{student[:name]}" if student[:cohort] == cohort
+# 		end
+# 	end	
+# end
+# #created 'no students in list' output
+# def show_students
+# 	if @students.length <= 0
+# 		puts "no students in list"
+# 	else
+# 		print_header
+# 		print_student(students)
+# 		print_footer(students)
+# 		student_select(students)
+# 		name_length(students) 
+# 		student_cohorts(students) 
+# 	end	
+# end
 
-#nothing happens until we call the methods
-# students = input_students
-# show_students(students)
+#redacted interactive_menu code
+@students = [] #an empty array accessable to all methods
 
-
-def interactive_menu
-	students = []
-	loop do
-	#1. print the menu and ask the user what to do
+def print_menu
 	puts "1. Input the students"
 	puts "2. Show the students"
 	puts "9. Exit" # 9 because we'll be adding more items
-	#2. read the input and save it to a variable
-	selection = gets.chomp
-	#3. do what the user has asked
+end
+
+def show_students
+	print_header
+	print_students_list
+	print_footer
+end
+
+def process(selection)
 	case selection
 		when "1" 
-			students = input_students
+			input_students
 		when "2"
-			print_header
-			print_student(students)
-			print_footer(students)
+			show_students
 		when "9"
 			exit	#this will cause the program to terminatw
 		else
 			puts "I don't know what you mean, try again"
-		end
 	end
 end	
 
+def interactive_menu
+	loop do 
+		print_menu
+		process(gets.chomp)
+	end
+end
+
 interactive_menu
+
+# nothing happens until we call the methods
+# hashed out the below as menu supercedes it
+# students = input_students
+# show_students(students)
+
+# def interactive_menu
+# 	students = []
+# 	loop do
+# 	#1. print the menu and ask the user what to do
+# 	puts "1. Input the students"
+# 	puts "2. Show the students"
+# 	puts "9. Exit" # 9 because we'll be adding more items
+# 	#2. read the input and save it to a variable
+# 	selection = gets.chomp
+# 	#3. do what the user has asked
+# 	case selection
+# 		when "1" 
+# 			students = input_students
+# 		when "2"
+# 			print_header
+# 			print_student(students)
+# 			print_footer(students)
+# 		when "9"
+# 			exit	#this will cause the program to terminatw
+# 		else
+# 			puts "I don't know what you mean, try again"
+# 		end
+# 	end
+# end	
+
+# interactive_menu
