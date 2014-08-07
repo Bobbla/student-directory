@@ -5,10 +5,10 @@ def input_students
 	students = []
 	#get the first name
 	print "What is your name?\n"
-	name = gets.chomp
+	name = gets.strip
 	#Which cohort
 	print "What cohort are you on?\n"
-	cohort = gets.chomp 
+	cohort = gets.strip 
 	#provided default & corrected spelling
 	cohort_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 				if cohort_months.include?(cohort)
@@ -18,17 +18,17 @@ def input_students
 					puts "cohort not provided"
 				else
 				puts "Please re-enter cohort"
-				cohort = gets.chomp
+				cohort = gets.strip
 			end
 	#ask about hobbies
 	print "What are your hobbies?\n"
-	hobbies = gets.chomp
+	hobbies = gets.strip
 	#country of birth
 	print "What what country where you born in?\n"
-	country = gets.chomp
+	country = gets.strip
 	#height
 	print "how tall are you?\n"
-	height = gets.chomp 
+	height = gets.strip 
 	#while the name is not empty, repeat this code
 	while !name.empty? do
 		# add the student hash to the array
@@ -41,10 +41,10 @@ def input_students
 		print "\n"
 		# get another name from user
 		print "What is the next name?\n"
-		name = gets.chomp
+		name = gets.strip
 		if name != ""
 			print "What cohort are you on?\n"
-			cohort = gets.chomp 
+			cohort = gets.strip 
 			#provided default & corrected spelling
 			if cohort_months.include?(cohort)
 					puts "Cohort verified"
@@ -53,17 +53,17 @@ def input_students
 					puts "cohort not provided"
 				else
 				puts "Please re-enter cohort"
-				cohort = gets.chomp
+				cohort = gets.strip
 			end
 				#ask about hobbies
 			print "What are your hobbies?\n"
-			hobbies = gets.chomp
+			hobbies = gets.strip
 			#country of birth
 			print "What what country where you born in?\n"
-			country = gets.chomp
+			country = gets.strip
 			#height
 			print "how tall are you?\n"
-			height = gets.chomp 
+			height = gets.strip 
 		end
 	end
 	#return array of students
@@ -115,7 +115,7 @@ end
 
 def student_select(studentlist)
 	puts "What starting letter would you like to search for?"
-	character = gets.chomp.capitalize
+	character = gets.strip.capitalize
 	studentlist.select do |student|
 		puts "#{student[:name]}" if student[:name].start_with?(character)
 	end
@@ -139,12 +139,24 @@ def student_cohorts(studentcohorts)
 		end
 	end	
 end
+#created 'no students in list' output
+def show_students(students)
+	if students.length <= 0
+		puts "no students in list"
+	else
+		print_header
+		print_student(students)
+		print_footer(students)
+		student_select(students)
+		name_length(students) 
+		student_cohorts(students) 
+	end	
+end
 
 #nothing happens until we call the methods
 students = input_students
-print_header
-print_student(students)
-print_footer(students)
-student_select(students)
-name_length(students) 
-student_cohorts(students) 
+show_students(students)
+
+
+
+
