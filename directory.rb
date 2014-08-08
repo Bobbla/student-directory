@@ -1,4 +1,4 @@
-	students = []
+	@students = []
 
 def input_students
 	print "Please enter the names of the students\n"
@@ -6,10 +6,10 @@ def input_students
 	#create an empty array
 	#get the first name
 	print "What is your name?\n"
-	name = gets.strip
+	name = STDIN.gets.strip
 	#Which cohort
 	print "What cohort are you on?\n"
-	cohort = gets.strip 
+	cohort = STDIN.gets.strip 
 	#provided default & corrected spelling
 	cohort_months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 				if cohort_months.include?(cohort)
@@ -19,17 +19,17 @@ def input_students
 					puts "cohort not provided"
 				else
 				puts "Please re-enter cohort"
-				cohort = gets.strip
+				cohort = STDIN.gets.strip
 			end
 	#ask about hobbies
 	print "What are your hobbies?\n"
-	hobbies = gets.strip
+	hobbies = STDIN.gets.strip
 	#country of birth
 	print "What what country where you born in?\n"
-	country = gets.strip
+	country = STDIN.gets.strip
 	#height
 	print "how tall are you?\n"
-	height = gets.strip 
+	height = STDIN.gets.strip 
 	#while the name is not empty, repeat this code
 	while !name.empty? do
 		# add the student hash to the array
@@ -42,10 +42,10 @@ def input_students
 		print "\n"
 		# get another name from user
 		print "What is the next name?\n"
-		name = gets.strip
+		name = STDIN.gets.strip
 		if name != ""
 			print "What cohort are you on?\n"
-			cohort = gets.strip 
+			cohort = STDIN.gets.strip 
 			#provided default & corrected spelling
 			if cohort_months.include?(cohort)
 					puts "Cohort verified"
@@ -54,17 +54,17 @@ def input_students
 					puts "cohort not provided"
 				else
 				puts "Please re-enter cohort"
-				cohort = gets.strip
+				cohort = STDIN.gets.strip
 			end
 				#ask about hobbies
 			print "What are your hobbies?\n"
-			hobbies = gets.strip
+			hobbies = STDIN.gets.strip
 			#country of birth
 			print "What what country where you born in?\n"
-			country = gets.strip
+			country = STDIN.gets.strip
 			#height
 			print "how tall are you?\n"
-			height = gets.strip 
+			height = STDIN.gets.strip 
 		end
 	end
 	#return array of students
@@ -182,15 +182,27 @@ def save_students
   end
   file.close
 end
-#able to load the students from the csv file (but not show them dummy)
-def load_students
-	file = File.open("students.csv", "r")
+#able to load the students from the csv file (but not show them)
+def load_students(filename = "students.csv")
+	file = File.open(filename, "r")
 	file.readlines.each do |line|
 		name, cohort = line.chomp.split(',')
 		@students << {:name => name, :cohort => cohort.to_sym}
 	end
 	file.close
 end
+
+def try_load_students
+	filename = ARGV.first # first argument from the command line
+	return if filename.nil? # get out of the methog if it isn't given
+	if File.exists?(filename) # if it exists
+		load_students(filename)
+		puts "Loaded #{@students.length} from #{filename}"
+	else # if it doesn't exist
+		puts "Sorry, #{filename} doesn't exist."
+		exit # quit the program
+	end
+end	
 
 def process(selection)
 	case selection
@@ -212,10 +224,11 @@ end
 def interactive_menu
 	loop do 
 		print_menu
-		process(gets.chomp)
+		process(STDIN.gets.chomp)
 	end
 end
 
+try_load_students
 interactive_menu
 
 # nothing happens until we call the methods
